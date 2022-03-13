@@ -14,11 +14,9 @@ jobs:
     steps:
       - name: File list
         run: |
-          pwd
           ls -a
       - name: Checkout @v3
         uses: actions/checkout@v3
       - name: File list after checkout
         run: |
-          pwd
           ls -a
