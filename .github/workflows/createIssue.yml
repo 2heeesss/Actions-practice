@@ -1,5 +1,6 @@
 name: Create Issue
-on: push
+on:
+  - push
 jobs:
   create-issue:
     runs-on: ubuntu-latest
