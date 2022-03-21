@@ -15,4 +15,3 @@ jobs:
       - name: File list after checkout
         run: |
           pwd
-          ls -a
