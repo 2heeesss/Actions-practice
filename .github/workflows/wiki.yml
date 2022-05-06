@@ -16,25 +16,40 @@ jobs:
         with:
           repository: ${{github.repository}}.wiki
           path: markdown
-      - name: check wiki repo content
+      # - name: edit wiki
+      #   run: |
+      #     echo ttt >> tttt.md
+      - name: Push to wiki
         run: |
           cd markdown
-          ls -al
-          cat test2.md
-      - name: edit wiki
-        run: |
           echo ttt >> tttt.md
-      - name: Commit report
-        run: |
-          git config user.name HSbot
-          git config user.email github-actions@github.com
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add .
-          git commit -m "generated"
-          git push
+          git diff-index --quiet HEAD || git commit -m "Add changes" && git push
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Add changes"
+      - name: Push changes to wiki repo
+        uses: ad-m/github-push-action@master
+        with:
+          repository: ${{github.repository}}.wiki # specify the wiki repo and push the update.
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Push to wiki
+      # - name: Commit report
       #   run: |
-      #     git config --local user.email "action@github.com"
-      #     git config --local user.name "GitHub Action"
+      #     git config user.name HSbot
+      #     git config user.email github-actions@github.com
       #     git add .
-      #     git diff-index --quiet HEAD || git commit -m "Add changes" && git push
+      #     git commit -m "generated"
+      #     git push
+
+      # # - name: Push to wiki
+      # #   run: |
+      # #     git config --local user.email "action@github.com"
+      # #     git config --local user.name "GitHub Action"
+      # #     git add .
+      # #     git diff-index --quiet HEAD || git commit -m "Add changes" && git push
