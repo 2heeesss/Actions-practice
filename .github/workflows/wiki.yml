@@ -12,24 +12,14 @@ jobs:
         with:
           path: base-code
       - name: Checkout wiki code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           repository: ${{github.repository}}.wiki
           path: markdown
-      - name: check wiki repo content
+      - name: Push to wiki
         run: |
-          ls -al
-      - name: edit wiki
-        run: |
-          echo test >> test.md
-      - name: Commit files
-        run: |
+          cd markdown
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git commit -m "Add changes"
-      - name: Push changes to wiki repo
-        uses: ad-m/github-push-action@master
-        with:
-          repository: ${{github.repository}}.wiki # specify the wiki repo and push the update.
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          git diff-index --quiet HEAD || git commit -m "Add changes" && git push
