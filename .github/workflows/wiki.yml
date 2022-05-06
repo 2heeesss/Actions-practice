@@ -19,7 +19,8 @@ jobs:
       - name: Push to wiki
         run: |
           cd markdown
-          echo #wiki test 123 >> wiki test 123.md
+          echo #wiki_test_123 >> wiki123.md
+          cat _Sidebar.md
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
