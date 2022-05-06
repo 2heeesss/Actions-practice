@@ -18,6 +18,7 @@ jobs:
           path: markdown
       - name: check wiki repo content
         run: |
+          cd markdown
           ls -al
       - name: edit wiki
         run: |
