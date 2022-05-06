@@ -20,7 +20,7 @@ jobs:
         run: |
           cd markdown
           ls -al
-          cat ./main
+          cat test2.md
       - name: edit wiki
         run: |
           echo ttt >> tttt.md
