@@ -14,7 +14,7 @@ jobs:
       - name: Checkout wiki code
         uses: actions/checkout@v3
         with:
-          repository: ${{github.repository}}.wiki
+          repository: ${{github.repository}}/wiki
           path: markdown
       # - name: edit wiki
       #   run: |
@@ -36,7 +36,7 @@ jobs:
       - name: Push changes to wiki repo
         uses: ad-m/github-push-action@master
         with:
-          repository: ${{github.repository}}.wiki # specify the wiki repo and push the update.
+          repository: ${{github.repository}}/wiki # specify the wiki repo and push the update.
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Commit report
