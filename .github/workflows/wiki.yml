@@ -14,42 +14,13 @@ jobs:
       - name: Checkout wiki code
         uses: actions/checkout@v3
         with:
-          repository: ${{github.repository}}/wiki
+          repository: ${{github.repository}}.wiki
           path: markdown
-      # - name: edit wiki
-      #   run: |
-      #     echo ttt >> tttt.md
       - name: Push to wiki
         run: |
           cd markdown
-          echo ttt >> tttt.md
+          echo #wiki test 123 >> wiki test 123.md
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
           git diff-index --quiet HEAD || git commit -m "Add changes" && git push
-      - name: Commit files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Add changes"
-      - name: Push changes to wiki repo
-        uses: ad-m/github-push-action@master
-        with:
-          repository: ${{github.repository}}/wiki # specify the wiki repo and push the update.
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Commit report
-      #   run: |
-      #     git config user.name HSbot
-      #     git config user.email github-actions@github.com
-      #     git add .
-      #     git commit -m "generated"
-      #     git push
-
-      # # - name: Push to wiki
-      # #   run: |
-      # #     git config --local user.email "action@github.com"
-      # #     git config --local user.name "GitHub Action"
-      # #     git add .
-      # #     git diff-index --quiet HEAD || git commit -m "Add changes" && git push
