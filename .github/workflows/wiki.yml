@@ -1,8 +1,35 @@
+# name: wiki
+# on:
+#   pull_request:
+#     branches: [develop]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout base code
+#         uses: actions/checkout@v3
+#         with:
+#           path: base-code
+#       - name: Checkout wiki code
+#         uses: actions/checkout@v3
+#         with:
+#           repository: ${{github.repository}}.wiki
+#           path: markdown
+#       - name: Push to wiki
+#         run: |
+#           cd markdown
+#           echo #wiki_test_123 >> wiki123.md
+#           cat _Sidebar.md
+#           git config --local user.email "action@github.com"
+#           git config --local user.name "GitHub Action"
+#           git add .
+#           git diff-index --quiet HEAD || git commit -m "Add changes" && git push
+
 name: wiki
 on:
   pull_request:
     branches: [develop]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,9 +46,19 @@ jobs:
       - name: Push to wiki
         run: |
           cd markdown
-          echo #wiki_test_123 >> wiki123.md
-          cat _Sidebar.md
+          echo test123 >> test123.md
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
           git diff-index --quiet HEAD || git commit -m "Add changes" && git push
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Add changes"
+      - name: Push changes to wiki repo
+        uses: ad-m/github-push-action@master
+        with:
+          repository: ${{github.repository}}.wiki # specify the wiki repo and push the update.
+          github_token: ${{ secrets.GITHUB_TOKEN }}
