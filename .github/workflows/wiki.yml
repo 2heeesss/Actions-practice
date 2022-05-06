@@ -20,12 +20,12 @@ jobs:
         run: |
           cd markdown
           ls -al
+          cat ./main
       - name: edit wiki
         run: |
-          echo test >> test.md
+          echo ttt >> tttt.md
       - name: Push to wiki
         run: |
-          cd markdown
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
