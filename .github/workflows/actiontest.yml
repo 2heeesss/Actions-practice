@@ -11,7 +11,7 @@ jobs:
         with:
           repository: ${{github.repository}}.wiki
           path: markdown
-      - uses: ./actions
+      - uses: ./.github/actions/hello
         id: hello
         with:
           repo: ${{github.repository}}.wiki
