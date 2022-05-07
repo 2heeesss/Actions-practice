@@ -1,0 +1,14 @@
+name: wiki sidebar
+author: 2heesss
+description: test action
+inputs:
+  repo:
+    description: 'repo'
+    required: true
+
+outputs:
+  wiki:
+    description: 'output test'
+runs:
+  using: 'node12'
+  main: index.js

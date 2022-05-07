@@ -1,0 +1,33 @@
+name: wiki
+on:
+  pull_request:
+    branches: [develop]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          repository: ${{github.repository}}.wiki
+          path: markdown
+      - uses: ./github/actions/
+        id: hello
+        with:
+          repo: ${{github.repository}}.wiki
+      - run: |
+          echo "${{steps.hello.outputs.wiki}}"
+
+      # - name: Push to wiki
+      #   run: |
+      #     cd markdown
+      #     echo test123 >> test123.md
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git add .
+      #     git diff-index --quiet HEAD || git commit -m "Add changes" && git push
+      # - name: Push changes to wiki repo
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     repository: ${{github.repository}}.wiki # specify the wiki repo and push the update.
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
