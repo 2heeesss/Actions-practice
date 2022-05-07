@@ -1,0 +1,20 @@
+name: wiki
+on: gollum
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout base code
+        uses: actions/checkout@v2
+        with:
+          path: base-code
+      - name: Checkout wiki code
+        uses: actions/checkout@v2
+        with:
+          repository: ${{github.repository}}.wiki
+          path: markdown
+      - name: check wiki repo content
+        run: |
+          cd markdown
+          ls -al
